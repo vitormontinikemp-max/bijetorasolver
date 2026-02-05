@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VITheorem AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          displayMath: [['$$', '$$'], ['\\[', '\\]']],
+          processEscapes: true
+        },
+        options: { enableMenu: false }
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="lang-control">
+            <button id="lang-btn" class="btn-secondary">EN | PT</button>
+        </div>
+        
+        <header>
+            <h1>VITheorem AI</h1>
+            <p class="subtitle">Enter any mathematical expression for a custom-tailored strategy.</p>
+        </header>
+
+        <div class="header-controls">
+            <button id="calc-toggle-btn" class="btn-secondary">📱</button>
+            <button id="materias-btn" class="btn-secondary">📖</button>
+            <button id="help-btn" class="btn-secondary">❓</button>
+        </div>
+
+<div id="mini-calculator" class="hidden">
+    <div class="calc-container">
+    <input type="text" id="calc-display" readonly placeholder="0">
+    <div class="calc-grid">
+    <button class="sc" onclick="calcInput('sin(')">sin</button>
+    <button class="sc" onclick="calcInput('cos(')">cos</button>
+    <button class="sc" onclick="calcInput('tan(')">tan</button>
+    <button class="sc" onclick="calcInput('log10(')">log₁₀</button>
+    <button class="op" onclick="calcClear()" id="c">C</button>
+
+    <button class="sc" onclick="calcInput('ln(')">ln</button>
+    <button class="sc" onclick="calcInput('exp(')">eˣ</button>
+    <button class="sc" onclick="calcInput('log(')">log(b,x)</button>
+    <button class="sc" onclick="calcInput(',')">,</button>
+    <button class="op" onclick="calcInput('/')">÷</button>
+
+    <button class="sc" onclick="calcInput('√(')">√</button>
+    <button class="sc" onclick="calcInput('(')">(</button>
+    <button class="sc" onclick="calcInput(')')">)</button>
+    <button class="sc" onclick="calcInput('**')">xʸ</button>
+    <button class="op" onclick="calcInput('*')">×</button>
+
+    <button onclick="calcInput('7')">7</button>
+    <button onclick="calcInput('8')">8</button>
+    <button onclick="calcInput('9')">9</button>
+    <button class="sc" onclick="calcInput('π')">π</button>
+    <button class="op" onclick="calcInput('-')">-</button>
+
+    <button onclick="calcInput('4')">4</button>
+    <button onclick="calcInput('5')">5</button>
+    <button onclick="calcInput('6')">6</button>
+    <button onclick="calcInput('.')">.</button>
+    <button class="op" onclick="calcInput('+')">+</button>
+
+    <button onclick="calcInput('1')">1</button>
+    <button onclick="calcInput('2')">2</button>
+    <button onclick="calcInput('3')">3</button>
+    <button onclick="calcInput('0')">0</button>
+    <button onclick="calcResult()" class="btn-equal" id="igual">=</button>
+    </div>
+    </div>
+</div>
+        
+        <div class="input-section">
+            <div class="input-group">
+                <input type="text" id="expression-input" placeholder="...">
+                <button id="magic-btn">Analyze</button>
+            </div>
+        </div>
+
+
+<div id="materias-container" class="hidden help-card">
+    <input type="radio" id="materia-pt" name="materia-lang" checked style="display:none;">
+    <input type="radio" id="materia-en" name="materia-lang" style="display:none;">
+
+    <div class="lang-switch-materias">
+        <label for="materia-pt">PT</label>
+        <label for="materia-en">EN</label>
+    </div>
+
+    <div class="help-header">
+        <h3 id="materia-titulo">
+            <span class="txt-pt">📖 Conteúdos</span>
+            <span class="txt-en">📖 Contents</span>
+        </h3>
+        
+        <select id="materia-selector-pt" class="lang-dropdown txt-pt">
+            <option value="">Selecione um tópico...</option>
+            <option value="1">1. Números e Expressões</option>
+            <option value="2">2. Equações e Inequações</option>
+            <option value="3">3. Funções e Gráficos</option>
+            <option value="4">4. Sequências e Séries</option>
+            <option value="5">5. Trigonometria</option>
+            <option value="6">6. Geometria Analítica</option>
+            <option value="7">7. Geometria Plana</option>
+            <option value="8">8. Geometria Espacial</option>
+            <option value="9">9. Matrizes e Determinantes</option>
+            <option value="10">10. Combinatória e Probabilidade</option>
+            <option value="11">11. Conjuntos e Lógica</option>
+        </select>
+
+        <select id="materia-selector-en" class="lang-dropdown txt-en">
+            <option value="">Select a topic...</option>
+            <option value="1">1. Numbers & Expressions</option>
+            <option value="2">2. Equations & Inequalities</option>
+            <option value="3">3. Functions & Graphs</option>
+            <option value="4">4. Sequences & Series</option>
+            <option value="5">5. Trigonometry</option>
+            <option value="6">6. Analytic Geometry</option>
+            <option value="7">7. Plane Geometry</option>
+            <option value="8">8. Spatial Geometry</option>
+            <option value="9">9. Matrices & Determinants</option>
+            <option value="10">10. Combinatorics & Probability</option>
+            <option value="11">11. Sets & Logic</option>
+        </select>
+    </div>
+
+    <div id="materia-corpo" class="help-content math-display">
+        <p class="txt-pt" style="text-align: center;">Escolha um tópico acima.</p>
+        <p class="txt-en" style="text-align: center;">Choose a topic above.</p>
+    </div>
+</div>
+
+<div id="help-container" class="hidden help-card">
+
+    <div id="content-pt" class="help-text">
+        <h3 class="guide-title">- Guia -</h3>
+        
+        <div class="help-section">
+            <p><strong>Foco Técnico:</strong> Priorize expressões puras. Em vez de "Como resolvo x²-4?", digite apenas <code>x² - 4 = 0</code>.</p>
+        </div>
+        
+        <div class="help-section">
+            <p><strong>💡 Dica de Mestre:</strong> Use comandos curtos ao lado: 
+               <br><code>sin(x) = 1/2 [passo a passo]</code>
+               <br><code>x² + 5x + 6 [fatorar]</code>
+            </p>
+        </div>
+        
+        <div class="help-section">
+            <p><strong>📉 Gráficos Automáticos:</strong> Toda função com <code>x</code> gera uma visualização. Em equações, o gráfico mostrará a relação funcional.</p>
+        </div>
+        
+        <div class="help-section">
+            <p><strong>📚 Especialidades:</strong> Álgebra, Cálculo, Trigonometria e Geometria Analítica.</p>
+        </div>
+        
+        <div class="philosophy">
+            <strong>🎓 Foco no Ensino:</strong> Este motor prioriza o <strong>Caminho Estratégico</strong>. O objetivo é que você entenda a lógica, não apenas o resultado.
+        </div>
+    </div>
+
+    <div id="content-en" class="help-text" style="display: none;">
+        <h3 class="guide-title">- Guide -</h3>
+        
+        <div class="help-section">
+            <p><strong>Technical Focus:</strong> Prioritize pure expressions. Instead of "How do I solve x²-4?", just type <code>x² - 4 = 0</code>.</p>
+        </div>
+        
+        <div class="help-section">
+            <p><strong>💡 Pro Tip:</strong> Use short commands next to the expression: 
+               <br><code>sin(x) = 1/2 [step by step]</code>
+               <br><code>x² + 5x + 6 [factor]</code>
+            </p>
+        </div>
+        
+        <div class="help-section">
+            <p><strong>📉 Automatic Plots:</strong> Any function containing <code>x</code> triggers a plot. For equations, the graph displays the functional relationship.</p>
+        </div>
+        
+        <div class="help-section">
+            <p><strong>📚 Expertise:</strong> Algebra, Calculus, Trigonometry, and Analytic Geometry.</p>
+        </div>
+        
+        <div class="philosophy">
+            <strong>🎓 Teaching Focus:</strong> This engine prioritizes the <strong>Strategic Path</strong>. The goal is mastering the logic, not just finding the answer.
+        </div>
+     
+    </div>
+</div>
+        
+
+        <div id="graph-container" class="hidden">
+          <div id="box" class="jxgbox" style="width:100%; height:300px; border-radius: 12px; border: 1px solid var(--border-color);"></div>
+        </div>
+        
+        <div id="result-card" class="hidden">
+            <div class="loader" id="loader">Processing expression...</div>
+            <div id="ai-response-content"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
