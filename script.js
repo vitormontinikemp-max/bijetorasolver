@@ -9,7 +9,7 @@ let board; // Instância global do gráfico
 
 const TRANSLATIONS = {
     PT: {
-        title: "✨ VITheorem AI",
+        title: "VITheorem AI",
         subtitle: "Seu Motor de Análise de Expressões Matemáticas.",
         placeholder: "Digite a expressão matemática...",
         analyze: "Analisar",
@@ -35,7 +35,7 @@ const TRANSLATIONS = {
 [PLOT]fórmula_js[/PLOT]`
     },
     EN: {
-        title: "✨ VITheorem AI",
+        title: "VITheorem AI",
         subtitle: "Your Mathematical Expression Analysis Engine.",
         placeholder: "Enter mathematical expression...",
         analyze: "Analyze",
@@ -271,8 +271,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-//HELPCONTAINER--------------------------------------------------------------------------------
-// Abertura/Fechamento do Help
+
+
+// HELPCONTAINER--------------------------------------------------------------------------------
+
 document.getElementById('help-btn').addEventListener('click', () => {
     const helpContainer = document.getElementById('help-container');
     helpContainer.classList.toggle('hidden');
@@ -281,15 +283,23 @@ document.getElementById('help-btn').addEventListener('click', () => {
     }
 });
 
-// Sincronizar Idioma do Help com o Botão Geral
+// Sincronizar Idioma
 document.getElementById('lang-btn').addEventListener('click', () => {
-    // Verifica qual texto está no botão agora para saber o idioma
-    // Se o botão diz 'PT | EN', significa que mudamos para Português
-    const isPT = document.getElementById('lang-btn').innerText.includes('PT |');
-    
-    document.getElementById('content-pt').style.display = isPT ? 'block' : 'none';
-    document.getElementById('content-en').style.display = isPT ? 'none' : 'block';
+    const pt = document.getElementById('content-pt');
+    const en = document.getElementById('content-en');
+
+    // Se o inglês está visível, mudamos para português
+    if (en.style.display === 'block' || en.style.display === '') {
+        en.style.display = 'none';
+        pt.style.display = 'block';
+    } else {
+        // Se o português está visível, voltamos para inglês
+        en.style.display = 'block';
+        pt.style.display = 'none';
+    }
 });
+
+
 
 //CONTENTS--------------------------------------------------------------------------------
 
@@ -1424,3 +1434,38 @@ document.querySelectorAll('input[name="materia-lang"]').forEach(radio => {
 materiasBtn.addEventListener('click', () => {
     materiasContainer.classList.toggle('hidden');
 });
+
+
+//TECLADO-----------------------------------------------------------------------------------
+const mainInput = document.getElementById('expression-input');
+const mathKeyboard = document.getElementById('math-keyboard');
+
+// Mostra o teclado ao focar no input
+mainInput.addEventListener('focus', () => {
+    mathKeyboard.classList.remove('hidden');
+});
+
+// Esconde o teclado ao clicar fora (com um pequeno delay para permitir o clique no botão)
+mainInput.addEventListener('blur', () => {
+    setTimeout(() => {
+        if (!document.activeElement.closest('#math-keyboard')) {
+            mathKeyboard.classList.add('hidden');
+        }
+    }, 150);
+});
+
+function writeSymbol(symbol) {
+    // Evita que o input perca o foco
+    event.preventDefault();
+    
+    const start = mainInput.selectionStart;
+    const end = mainInput.selectionEnd;
+    const text = mainInput.value;
+
+    mainInput.value = text.substring(0, start) + symbol + text.substring(end);
+    
+    // Reposiciona o cursor
+    const newPos = start + symbol.length;
+    mainInput.setSelectionRange(newPos, newPos);
+    mainInput.focus();
+}
