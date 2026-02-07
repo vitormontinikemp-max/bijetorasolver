@@ -27,7 +27,10 @@
         </div>
         
         <header>
-            <h1>VITheorem AI</h1>
+            <img src="https://i.postimg.cc/Nf1P8Bqn/VI.png" alt="Logo" class="header-logo">
+            
+            <h1>VITheorem AI </h1> 
+            
             <p class="subtitle">Enter any mathematical expression for a custom-tailored strategy.</p>
         </header>
 
@@ -80,13 +83,317 @@
     </div>
 </div>
         
-        <div class="input-section">
-            <div class="input-group">
-                <input type="text" id="expression-input" placeholder="...">
-                <button id="magic-btn">Analyze</button>
-            </div>
-        </div>
+       <div class="input-section">
+    <div class="input-group">
+        <input type="text" id="expression-input" placeholder="..." autocomplete="off">
+        <button id="magic-btn">Analyze</button>
+    </div>
 
+    <div id="math-keyboard" class="keyboard-container hidden">
+    <div class="symbol-grid">
+        
+        <!-- ROW 1: Basic Operations -->
+        <h2>Basic Operations</h2>
+        <button type="button" class="kb-btn op" onmousedown="writeSymbol(' + ')">+</button>
+        <button type="button" class="kb-btn op" onmousedown="writeSymbol(' - ')">−</button>
+        <button type="button" class="kb-btn op" onmousedown="writeSymbol(' × ')">×</button>
+        <button type="button" class="kb-btn op" onmousedown="writeSymbol(' ÷ ')">÷</button>
+        <button type="button" class="kb-btn op" onmousedown="writeSymbol('^')">^</button>
+        <button type="button" class="kb-btn op" onmousedown="writeSymbol('!')">!</button>
+        
+        <!-- ROW 2: Comparison -->
+        <h2>Comparison</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' = ')">=</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≠ ')">≠</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≈ ')">≈</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≡ ')">≡</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' < ')">&lt;</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' > ')">&gt;</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≤ ')">≤</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≥ ')">≥</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≪ ')">≪</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≫ ')">≫</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∝ ')">∝</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ± ')">±</button>
+
+        <!-- ROW 3: Algebra -->
+        <h2>Algebra</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('²')">x²</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('³')">x³</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('^{-1}')">x⁻¹</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('√(')">√</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('∛(')">∛</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('{n}√(')">ⁿ√</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('| |')">|x|</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('⌊ ⌋')">⌊x⌋</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('⌈ ⌉')">⌈x⌉</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('gcd(')">gcd</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('lcm(')">lcm</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('mod(')">mod</button>
+        
+        <!-- ROW 4: Functions -->
+        <h2>Functions</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('round(')">round</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('factor(')">factor</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('solve(')">solve</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('roots(')">roots</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('exp(')">exp</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('Re(')">Re</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('Im(')">Im</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('conj(')">conj</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('arg(')">arg</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('norm(')">norm</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('random(')">rand</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('sign(')">sign</button>
+
+        <!-- ROW 5: Trigonometry -->
+        <h2>Trigonometry</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('sin(')">sin</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('cos(')">cos</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('tan(')">tan</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('csc(')">csc</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('sec(')">sec</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('cot(')">cot</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('sin⁻¹(')">sin⁻¹</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('cos⁻¹(')">cos⁻¹</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('tan⁻¹(')">tan⁻¹</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('sinh(')">sinh</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('cosh(')">cosh</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('tanh(')">tanh</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('sinh⁻¹(')">sinh⁻¹</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('cosh⁻¹(')">cosh⁻¹</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('tanh⁻¹(')">tanh⁻¹</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('deg2rad(')">°→rad</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('rad2deg(')">rad→°</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('°')">°</button>
+
+        <!-- ROW 6: Calculus -->
+        <h2>Calculus</h2>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('d/dx(')">d/dx</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∫_{ }^{ }')">∫</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∂/∂x(')">∂/∂x</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('lim_{x→}')">lim</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∑_{i= }^{ }')">∑</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∏_{i= }^{ }')">∏</button>
+        
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∞')">∞</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('→')">→</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∇')">∇</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('Δ')">Δ</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∂')">∂</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∮')">∮</button>
+        
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∬')">∬</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∭')">∭</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∯')">∯</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∰')">∰</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∴')">∴</button>
+        <button type="button" class="kb-btn calc" onmousedown="writeSymbol('∵')">∵</button>
+
+        <!-- ROW 7: Statistics -->
+        <h2>Statistics</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('mean(')">mean</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('median(')">median</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('std(')">σ</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('var(')">var</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('binom(')">binom</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('norm(')">normal</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('P(')">P</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('C(')">C</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('∑x')">∑x</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('∑x²')">∑x²</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('σ²')">σ²</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('s²')">s²</button>
+
+        <!-- ROW 8: Logarithms -->
+        <h2>Logarithms</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('log(')">log₁₀</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('ln(')">ln</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('log2(')">log₂</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('exp(')">eˣ</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('10^')">10ˣ</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('2^')">2ˣ</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('log(')">log</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('ln1p(')">ln1p</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('log10(')">log10</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('log1p(')">log1p</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('logb(')">logb</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('pow(')">pow</button>
+
+        <!-- ROW 9: Constants -->
+        <h2>Constants</h2>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('π')">π</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('e')">e</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('φ')">φ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('i')">i</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('∞')">∞</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('ℵ')">ℵ</button>
+        
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('γ')">γ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('ε')">ε</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('c')">c</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('G')">G</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('h')">h</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('k')">k</button>
+
+        <!-- ROW 10: Variables (Latin) -->
+        <h2>Variables</h2>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('x')">x</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('y')">y</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('z')">z</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('a')">a</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('b')">b</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('c')">c</button>
+        
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('X')">X</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('Y')">Y</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('Z')">Z</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('A')">A</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('B')">B</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('C')">C</button>
+        
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('n')">n</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('m')">m</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('p')">p</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('q')">q</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('r')">r</button>
+        <button type="button" class="kb-btn var" onmousedown="writeSymbol('s')">s</button>
+
+        <!-- ROW 11: Greek Letters -->
+        <h2>Greek Letters</h2>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('α')">α</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('β')">β</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('γ')">γ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('δ')">δ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('ε')">ε</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('θ')">θ</button>
+        
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('λ')">λ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('μ')">μ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('σ')">σ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('τ')">τ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('φ')">φ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('ω')">ω</button>
+        
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('ξ')">ξ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('ζ')">ζ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('η')">η</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('ι')">ι</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('κ')">κ</button>
+        <button type="button" class="kb-btn grk" onmousedown="writeSymbol('ν')">ν</button>
+
+        <!-- ROW 12: Sets -->
+        <h2>Sets</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∈ ')">∈</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∉ ')">∉</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊂ ')">⊂</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊆ ')">⊆</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∪ ')">∪</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∩ ')">∩</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∅ ')">∅</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ℕ ')">ℕ</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ℤ ')">ℤ</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ℚ ')">ℚ</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ℝ ')">ℝ</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ℂ ')">ℂ</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊃ ')">⊃</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊇ ')">⊇</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∖ ')">∖</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' × ')">×</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∘ ')">∘</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⨯ ')">⨯</button>
+
+        <!-- ROW 13: Matrices -->
+        <h2>Matrices</h2>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('[[ , ],[ , ]]')">2×2</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('[[ , , ],[ , , ],[ , , ]]')">3×3</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('[[ , , , ],[ , , , ],[ , , , ],[ , , , ]]')">4×4</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('det(')">det</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('transpose(')">T</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('inverse(')">A⁻¹</button>
+        
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('trace(')">tr</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('rank(')">rank</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('eig(')">eig</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('I')">I</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('0')">0</button>
+        <button type="button" class="kb-btn matrix" onmousedown="writeSymbol('1')">1</button>
+
+        <!-- ROW 14: Parentheses & Brackets -->
+        <h2>Brackets</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('(')">( )</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('[')">[ ]</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('{')">{ }</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('|')">| |</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('⟨')">⟨ ⟩</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('⌈')">⌈ ⌉</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('⌊')">⌊ ⌋</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('⟦')">⟦ ⟧</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('⟮')">⟮ ⟯</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('⟦')">⟦ ⟧</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('〈')">〈 〉</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol('《')">《 》</button>
+
+        <!-- ROW 15: Logic -->
+        <h2>Logic</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∧ ')">∧</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∨ ')">∨</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ¬ ')">¬</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⇒ ')">⇒</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⇔ ')">⇔</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∀ ')">∀</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∃ ')">∃</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∄ ')">∄</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊤ ')">⊤</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊥ ')">⊥</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊢ ')">⊢</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊨ ')">⊨</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊕ ')">⊕</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊗ ')">⊗</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊙ ')">⊙</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∥ ')">∥</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∦ ')">∦</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≅ ')">≅</button>
+
+        <!-- ROW 16: Geometry & Misc -->
+        <h2>Geometry & Misc</h2>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∠ ')">∠</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⊥ ')">⊥</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∥ ')">∥</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ∼ ')">∼</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≅ ')">≅</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ≡ ')">≡</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ° ')">°</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ′ ')">′</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ″ ')">″</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' % ')">%</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ‰ ')">‰</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ‱ ')">‱</button>
+        
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⦁ ')">•</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ⋯ ')">⋯</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' … ')">…</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' † ')">†</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' ‡ ')">‡</button>
+        <button type="button" class="kb-btn" onmousedown="writeSymbol(' § ')">§</button>
+    </div>
+</div>
+</div>
+
+        
 
 <div id="materias-container" class="hidden help-card">
     <input type="radio" id="materia-pt" name="materia-lang" checked style="display:none;">
@@ -142,11 +449,11 @@
 
 <div id="help-container" class="hidden help-card">
 
-    <div id="content-pt" class="help-text">
+    <div id="content-pt" class="help-text" style="display: none;">
         <h3 class="guide-title">- Guia -</h3>
         
         <div class="help-section">
-            <p><strong>Foco Técnico:</strong> Priorize expressões puras. Em vez de "Como resolvo x²-4?", digite apenas <code>x² - 4 = 0</code>.</p>
+            <p><strong>Foco Técnico:</strong> Priorize expressões puras. Em vez de "Como resolvo x²-4?", digite apenas <code>x² - 4 = 0</code>;</p>
         </div>
         
         <div class="help-section">
@@ -169,11 +476,11 @@
         </div>
     </div>
 
-    <div id="content-en" class="help-text" style="display: none;">
+    <div id="content-en" class="help-text" style="display: block;">
         <h3 class="guide-title">- Guide -</h3>
         
         <div class="help-section">
-            <p><strong>Technical Focus:</strong> Prioritize pure expressions. Instead of "How do I solve x²-4?", just type <code>x² - 4 = 0</code>.</p>
+            <p><strong>Technical Focus:</strong> Prioritize pure expressions. Instead of "How do I solve x²-4?", just type <code>x² - 4 = 0</code></p>
         </div>
         
         <div class="help-section">
@@ -208,6 +515,8 @@
             <div id="ai-response-content"></div>
         </div>
     </div>
+    
+    
     <script src="script.js"></script>
 </body>
 </html>
