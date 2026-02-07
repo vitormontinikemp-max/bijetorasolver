@@ -3,7 +3,7 @@
     --card-bg: #ffffff;
     --border-color: #e4e4e7;
     --border-hover: #d4d4d8;
-    --text-primary: #18181b;
+    --text-primary: #2c2c2c;
     --text-secondary: #838383;
     --text-muted: #a1a1aa;
     --accent-gray: #18181b;
@@ -57,10 +57,11 @@ h1 {
     font-weight: 800;
     letter-spacing: -0.03em;
     margin-bottom: 0.5rem;
-    background: linear-gradient(135deg, var(--text-primary) 0%, #404040 100%);
+    background: linear-gradient(135deg, var(--text-primary) 0%, #fff566 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.08);
 }
 
 .subtitle {
@@ -148,8 +149,8 @@ button:hover::after {
 button:hover {
     background: #000000;
     box-shadow: 
-        0 6px 24px rgba(0, 0, 0, 0.12),
-        0 2px 6px rgba(0, 0, 0, 0.08);
+        0 6px 24px rgba(95, 95, 95, 0.12),
+        0 2px 6px rgba(102, 102, 102, 0.08);
     transform: translateY(-2px);
 }
 
@@ -272,7 +273,7 @@ button:active {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     color: white;
     border-radius: 10px;
-    border: 1px solid #2a2a2a;
+    border: 2px solid linear-gradient(#ffed4c , gray);
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -299,6 +300,7 @@ button:active {
         0 12px 32px rgba(0,0,0,0.15),
         0 4px 12px rgba(0,0,0,0.1);
     color: white;
+    border: 3px solid linear-gradient(#ffed4c , gray);
 }
 
 #magic-btn:hover::before {
@@ -708,4 +710,305 @@ button:active {
 .math-display::-webkit-scrollbar-thumb:hover { 
     background: var(--text-muted); 
     border: 1px solid transparent;
+}
+
+/* TECLADO VIRTUAL */
+
+/* ============================================================
+   MATH KEYBOARD STYLES (Organized & Consistent)
+   ============================================================ */
+
+.keyboard-container {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 20px;
+    margin-top: -34px;
+    margin-bottom: 30px;
+    box-shadow: 
+        0 12px 32px -8px rgba(0,0,0,0.1),
+        0 4px 12px rgba(0,0,0,0.05);
+    animation: slideDown 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 20;
+    position: relative;
+    overflow: hidden;
+}
+
+.keyboard-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-gray), transparent);
+    border-radius: 14px 14px 0 0;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Section Headers */
+.symbol-grid h2 {
+    grid-column: 1 / -1;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent-gray);
+    margin: 20px 0 12px 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border-color);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+}
+
+.symbol-grid h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--accent-gray);
+    border-radius: 2px;
+}
+
+/* First header should have no top margin */
+.symbol-grid h2:first-of-type {
+    margin-top: 0;
+}
+
+/* Grid Layout */
+.symbol-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
+}
+
+/* Custom Scrollbar */
+.symbol-grid::-webkit-scrollbar { 
+    width: 6px; 
+}
+.symbol-grid::-webkit-scrollbar-track { 
+    background: transparent; 
+    margin: 5px 0;
+}
+.symbol-grid::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+.symbol-grid::-webkit-scrollbar-thumb:hover { 
+    background: var(--text-muted); 
+}
+
+/* Keyboard Buttons */
+.kb-btn {
+    background: var(--bg-main) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+    min-height: 42px !important;
+    padding: 0 4px !important;
+    font-size: 0.9rem !important;
+    border-radius: 8px !important;
+    box-shadow: 
+        0 1px 3px rgba(0,0,0,0.04),
+        inset 0 1px 0 rgba(255,255,255,0.8) !important;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.kb-btn:hover {
+    background: var(--accent-gray) !important;
+    color: white !important;
+    border-color: var(--accent-gray) !important;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 4px 12px rgba(0,0,0,0.1),
+        0 2px 4px rgba(0,0,0,0.08) !important;
+}
+
+.kb-btn:active {
+    transform: translateY(0);
+    box-shadow: 
+        0 1px 2px rgba(0,0,0,0.1),
+        inset 0 1px 1px rgba(0,0,0,0.1) !important;
+}
+
+/* Button Type Variations */
+.kb-btn.op {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+    font-weight: 600;
+    border-color: #d1d5db !important;
+    color: var(--accent-gray) !important;
+}
+
+.kb-btn.op:hover {
+    background: var(--accent-gray) !important;
+    color: white !important;
+}
+
+.kb-btn.calc {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+    border-color: #bae6fd !important;
+    color: #0369a1 !important;
+    font-weight: 600;
+}
+
+.kb-btn.calc:hover {
+    background: #0369a1 !important;
+    color: white !important;
+}
+
+.kb-btn.grk {
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%) !important;
+    border-color: #e9d5ff !important;
+    color: #7c3aed !important;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.kb-btn.grk:hover {
+    background: #7c3aed !important;
+    color: white !important;
+}
+
+.kb-btn.var {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+    border-color: #bbf7d0 !important;
+    color: #15803d !important;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+.kb-btn.var:hover {
+    background: #15803d !important;
+    color: white !important;
+}
+
+.kb-btn.matrix {
+    background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%) !important;
+    border-color: #fde047 !important;
+    color: #ca8a04 !important;
+    font-weight: 600;
+}
+
+.kb-btn.matrix:hover {
+    background: #ca8a04 !important;
+    color: white !important;
+}
+
+/* Special Function Buttons */
+.kb-btn[onmousedown*="solve("],
+.kb-btn[onmousedown*="factor("],
+.kb-btn[onmousedown*="roots("] {
+    background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%) !important;
+    border-color: #fed7aa !important;
+    color: #ea580c !important;
+}
+
+.kb-btn[onmousedown*="solve("]:hover,
+.kb-btn[onmousedown*="factor("]:hover,
+.kb-btn[onmousedown*="roots("]:hover {
+    background: #ea580c !important;
+    color: white !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .symbol-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        max-height: 500px;
+    }
+    
+    .kb-btn {
+        min-height: 38px !important;
+        font-size: 0.85rem !important;
+    }
+    
+    .keyboard-container {
+        padding: 16px;
+        margin-top: -30px;
+    }
+    
+    .symbol-grid h2 {
+        font-size: 0.8rem;
+        margin: 16px 0 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .symbol-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+    }
+    
+    .kb-btn {
+        min-height: 36px !important;
+        font-size: 0.8rem !important;
+    }
+}
+
+/* FOTO */
+
+.logo-wrapper {
+    display: flex;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 12px; 
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+header h1 {
+    margin: 0;
+    display: inline-block; 
+    line-height: 1; 
+}
+
+.header-logo {
+    width: 65px; 
+    height: 65px;
+    object-fit: contain;
+    transform: translateY(24px);
+    margin: 0; 
+}
+
+@media (max-width: 600px) {
+    .header-logo {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* EMOJI CINZA */
+.btn-secondary {
+    filter: grayscale(100%) brightness(0.3); /* Remove cor e deixa bem escuro */
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.btn-secondary:hover {
+    transform: scale(1.1); /* Dá um zoom leve ao passar o mouse */
+    
 }
